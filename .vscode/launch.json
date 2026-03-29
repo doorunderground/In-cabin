@@ -1,0 +1,67 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "DMS - 카메라 (기본)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "DMS - sleep_test1.mp4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": ["--source", "test_video/sleep_test1.mp4", "--loop"]
+        },
+        {
+            "name": "DMS - sleep_test2.mp4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": ["--source", "test_video/sleep_test2.mp4", "--loop"]
+        },
+        {
+            "name": "DMS - sleep_test3.mp4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": ["--source", "test_video/sleep_test3.mp4", "--loop"]
+        },
+        {
+            "name": "DMS - sleep_test1 (x0.5 느리게)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": ["--source", "test_video/sleep_test1.mp4", "--loop", "--speed", "0.5"]
+        },
+        {
+            "name": "DMS - 영상 직접 입력",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "args": ["--source", "${input:videoPath}", "--loop"]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "videoPath",
+            "type": "promptString",
+            "description": "영상 파일 경로 (test_video/ 기준)",
+            "default": "test_video/sleep_test1.mp4"
+        }
+    ]
+}

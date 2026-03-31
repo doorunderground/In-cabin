@@ -1,56 +1,61 @@
-# ─────────────────────────────────────────────
-#  DMS Phase 1 & 2 – Configuration & Thresholds
-# ─────────────────────────────────────────────
+# DMS 설정값 모음
+# 이 파일에서 모든 수치 기준값을 한곳에서 관리합니다.
+# 값을 바꾸고 싶으면 여기서만 바꾸면 됩니다.
 
-# ── Camera ────────────────────────────────────
-CAMERA_INDEX  = 0
-FRAME_WIDTH   = 1280
-FRAME_HEIGHT  = 720
+# ── 카메라 기본 설정 ──────────────────────────────────
+CAMERA_INDEX  = 0       # 카메라 번호 (0 = 기본 카메라)
+FRAME_WIDTH   = 1280    # 화면 가로 크기 (픽셀)
+FRAME_HEIGHT  = 720     # 화면 세로 크기 (픽셀)
 
-# ── MediaPipe ─────────────────────────────────
-FACE_DETECTION_CONFIDENCE  = 0.5
-FACE_TRACKING_CONFIDENCE   = 0.5
+# ── MediaPipe 얼굴 감지 감도 ──────────────────────────
+FACE_DETECTION_CONFIDENCE = 0.5   # 얼굴 감지 최소 신뢰도 (0~1)
+FACE_TRACKING_CONFIDENCE  = 0.5   # 얼굴 추적 최소 신뢰도 (0~1)
 
-# ── EAR (Eye Aspect Ratio) ────────────────────
-# 정상 개안: ~0.30–0.40  /  눈 감김: < 0.25
-EAR_CLOSE_THRESHOLD  = 0.25   # 이 값 미만 → 눈 감김으로 판정
-EAR_WARN_THRESHOLD   = 0.22   # 이 값 미만 → 더 강한 감김
+# ── EAR (눈 열린 정도, Eye Aspect Ratio) ──────────────
+# 눈을 완전히 뜨면 약 0.30~0.40, 감으면 0.25 미만
+EAR_CLOSE_THRESHOLD = 0.25   # 이 값 미만 → 눈 감긴 것으로 판정
 
-# ── Drowsiness timing (seconds) ───────────────
-DROWSY_EARLY_SEC    = 1.5   # 눈 감김 지속 → EARLY 단계
-DROWSY_WARNING_SEC  = 2.5   # 눈 감김 지속 → WARNING 단계
-DROWSY_CRITICAL_SEC = 3.5   # 눈 감김 지속 → CRITICAL 단계
+# ── 졸음 판정 시간 기준 (초) ──────────────────────────
+DROWSY_EARLY_SEC    = 1.5   # 눈이 이 시간 이상 감기면 → 초기 졸음
+DROWSY_WARNING_SEC  = 2.5   # 눈이 이 시간 이상 감기면 → 졸음 경고
+DROWSY_CRITICAL_SEC = 3.5   # 눈이 이 시간 이상 감기면 → 위험
 
-# ── PERCLOS (Percentage of Eye Closure) ───────
-# 슬라이딩 윈도우(초) 내 눈 감김 비율
-PERCLOS_WINDOW_SEC  = 5.0   # 측정 구간
-PERCLOS_WARN_RATIO  = 0.30  # 30 % → WARNING
-PERCLOS_ALERT_RATIO = 0.50  # 50 % → CRITICAL
+# ── PERCLOS (일정 시간 동안 눈 감긴 비율) ─────────────
+PERCLOS_WINDOW_SEC  = 5.0   # 측정 시간 구간 (5초)
+PERCLOS_WARN_RATIO  = 0.30  # 5초 중 30% 이상 감겨 있으면 → 경고
+PERCLOS_ALERT_RATIO = 0.50  # 5초 중 50% 이상 감겨 있으면 → 위험
 
-# ── MAR (Mouth Aspect Ratio) ──────────────────
-# 입 닫힘: ~0.0–0.3  /  하품: > 0.5
-MAR_OPEN_THRESHOLD = 0.55   # 이 값 초과 → 입 열림(하품 후보)
+# ── MAR (입 열린 정도, Mouth Aspect Ratio) ────────────
+MAR_OPEN_THRESHOLD = 0.55   # 이 값 초과 → 입이 벌어진 것으로 판정
 
-# ── Yawn detection ────────────────────────────
-YAWN_MIN_DURATION_SEC = 1.0  # MAR 초과 지속 시간이 이 이상이면 하품 확정
-YAWN_COOLDOWN_SEC     = 6.0  # 하품 인식 후 재인식까지 대기
+# ── 하품 판정 기준 ────────────────────────────────────
+YAWN_MIN_DURATION_SEC = 1.0  # 입이 이 시간 이상 열려 있으면 하품으로 확정
+YAWN_COOLDOWN_SEC     = 6.0  # 하품 인식 후, 다시 인식까지 기다리는 시간
 
-# ── Alert ─────────────────────────────────────
-ALERT_COOLDOWN_SEC = 5.0     # 같은 레벨 경보 재발생 최소 간격
-ALERT_FLASH_HZ     = 2.0     # 경보 배너 깜빡임 주파수
+# ── 경보 설정 ────────────────────────────────────────
+ALERT_COOLDOWN_SEC = 5.0     # 같은 경보가 너무 자주 울리지 않도록 대기 시간
+ALERT_FLASH_HZ     = 2.0     # 경보 배너 깜빡임 속도 (초당 횟수)
 
-# ── Head Pose (degrees) ────────────────────────
-# 정상 전방 주시 범위 기준값
-PITCH_ALERT_MAX    = 30.0    # |Pitch| 초과 → 시선 분산 시작
-PITCH_CRITICAL_MAX = 55.0    # |Pitch| 초과 → 즉각 위험
+# ── 머리 각도 경고 기준 (도) ──────────────────────────
+PITCH_ALERT_MAX    = 30.0    # 고개 앞뒤 기울기가 이 각도 초과 → 주의
+PITCH_CRITICAL_MAX = 55.0    # 고개 앞뒤 기울기가 이 각도 초과 → 위험
 
-YAW_ALERT_MAX      = 35.0    # |Yaw| 초과 → 시선 분산 시작
-YAW_CRITICAL_MAX   = 60.0    # |Yaw| 초과 → 즉각 위험
+YAW_ALERT_MAX      = 35.0    # 고개 좌우 회전이 이 각도 초과 → 주의
+YAW_CRITICAL_MAX   = 60.0    # 고개 좌우 회전이 이 각도 초과 → 위험
 
-ROLL_ALERT_MAX     = 25.0    # |Roll| 초과 → 경고 (참고용)
+# ── 시선 분산 판정 기준 ───────────────────────────────
+HEAD_DISTRACTION_MIN_DURATION_SEC = 2.0   # 시선 이탈이 이 시간 이상 지속 → 경고
+HEAD_DISTRACTION_WINDOW_SEC       = 5.0   # 이탈 비율을 계산할 시간 구간
 
-# ── Distraction Detection ──────────────────────
-HEAD_DISTRACTION_MIN_DURATION_SEC = 2.0   # 이 시간 이상 분산 → DISTRACTED
-HEAD_DISTRACTION_WINDOW_SEC       = 5.0   # 슬라이딩 윈도우 길이
-HEAD_DISTRACTION_WARN_RATIO       = 0.30  # 윈도우 내 30 % → WARNING
-HEAD_DISTRACTION_ALERT_RATIO      = 0.60  # 윈도우 내 60 % → CRITICAL
+# ── 캘리브레이션 (시선 기준점 설정) ──────────────────
+CALIB_FRAMES   = 90     # 처음 이 프레임 수 동안 정면을 바라봐서 기준값을 수집
+REPROJ_ERR_MAX = 8.0    # solvePnP 정확도 허용 오차 (픽셀), 이보다 크면 무시
+
+# ── 시선 계산 가중치 ──────────────────────────────────
+GAZE_HEAD_WEIGHT = 0.7     # 머리 방향 반영 비율 (70%)
+GAZE_EYE_WEIGHT  = 0.3     # 눈동자 방향 반영 비율 (30%)
+GAZE_EYE_SCALE   = 3.0     # 눈동자 움직임 크기 조정 계수
+
+# ── 시선 존 경계값 ────────────────────────────────────
+GAZE_ZONE_LR_TH   = 0.25   # 이 값 초과 → 좌/우 이탈
+GAZE_ZONE_DOWN_TH = 0.18   # 이 값 초과 → 아래 이탈

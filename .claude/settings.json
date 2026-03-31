@@ -7,7 +7,8 @@
       "WebFetch(domain:namu.wiki)",
       "Bash(/c/Users/KDT51/miniconda3/python.exe -c:*)",
       "Bash(/c/Users/KDT51/miniconda3/python.exe -m py_compile:*)",
-      "Bash(powershell.exe -Command \"& ''C:\\\\Users\\\\KDT51\\\\miniconda3\\\\python.exe'' -m py_compile ''C:\\\\InCabin3\\\\dms\\\\alert\\\\visual_overlay.py'' 2>&1; Write-Host ''ExitCode:'' $LASTEXITCODE\")"
+      "Bash(powershell.exe -Command \"& ''C:\\\\Users\\\\KDT51\\\\miniconda3\\\\python.exe'' -m py_compile ''C:\\\\InCabin3\\\\dms\\\\alert\\\\visual_overlay.py'' 2>&1; Write-Host ''ExitCode:'' $LASTEXITCODE\")",
+      "Bash(\"C:/Users/KDT51/AppData/Local/Microsoft/WindowsApps/python.exe\" -c:*)"
     ]
   }
 }
